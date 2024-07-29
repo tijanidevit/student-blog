@@ -10,10 +10,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/', function () {
-    return view('welcome');
-});
-
 
 Route::as('auth.')->middleware(['web', 'guest'])->group(function () {
     Route::view('login', 'auth.login')->name('login_view');
@@ -28,3 +24,8 @@ Route::as('category.')->prefix('categories')->group(function () {
     Route::get('', [CategoryController::class, 'index']);
     Route::get('{slug}', [CategoryController::class, 'show']);
 });
+
+
+
+
+Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

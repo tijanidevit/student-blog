@@ -22,21 +22,23 @@ class AuthController extends Controller
             return to_route('admin.dashboard');
         }
 
-
-        return redirect()->intended('home');
+        return redirect()->intended('/');
     }
 
     public function register(RegisterRequest $request) : RedirectResponse {
         $data = $request->validated();
 
-        return DB::transaction(function () use($data) {
-            $user = User::create(Arr::only($data, ['email', 'password']));
+        DB::transaction(function () use($data) {
+            $user = User::create(Arr::only($data, ['email', 'password', 'name']));
+            $user->student()->create(Arr::only($data, ['matric_no']));
 
-            $user->student()->create(Arr::except($data, ['email', 'password']));
+            Auth::login($user);
         });
-
-
-        return redirect()->intended('home');
+        return redirect()->intended('/');
     }
 
+    public function logout() : RedirectResponse {
+        Auth::logout();
+        return redirect()->intended('/');
+    }
 }

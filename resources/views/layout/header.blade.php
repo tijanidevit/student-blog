@@ -92,7 +92,10 @@
                                             <a href="{{route('admin.dashboard')}}" class="eblog-py-btn" onclick="document.getElementById('id01').style.display='inline'">Admin Dashboard</a>
                                         </div>
                                     @endif
-                                    <a href="{{route('auth.login_view')}}" class="eblog-login-btn text-danger">Logout</a>
+                                    <form action="{{route('logout')}}" method="post">
+                                        @csrf
+                                        <button class="eblog-login-btn text-danger">Logout</button>
+                                    </form>
                                 @endauth
                             </div>
                         </div>
