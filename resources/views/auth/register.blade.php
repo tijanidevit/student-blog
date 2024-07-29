@@ -33,7 +33,7 @@
                         <div class="meta">
                             <a href="{{url('/')}}" class="prev">Home</a>
                             <img src="/assets/images/icon/chevron-right.svg" alt="">
-                            <a href="#" class="last">Sign In</a>
+                            <a href="#" class="last">Sign Up</a>
                         </div>
                     </div>
                     <!-- bread crumb inner wrapper end -->
@@ -50,7 +50,7 @@
             <div class="section-inner">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-8">
-                        <h2 class="heading-title text-center">Sign In</h2>
+                        <h2 class="heading-title text-center">Sign Up</h2>
                         <form action="{{route('auth.register_action')}}" method="POST">
                             @csrf
                             <div class="form-inner inner">
@@ -80,20 +80,13 @@
                                         <small class="text-danger">{{$message}}</small>
                                     @enderror
                                 </div>
-                                <div class="single-input-wrapper check two">
-                                    <div class="check-inner">
-                                        <input type="checkbox" id="terms" name="terms" value="terms of use">
-                                        <label for="terms"> Remember me</label><br>
-                                    </div>
-                                    {{-- <a href="reset-password.html" class="forgot-password">Forgot password?</a> --}}
-                                </div>
                                 <div class="single-input-wrapper">
-                                    <button type="submit" class="subscribe-btn tp-btn btn-primary">Log in</button>
+                                    <button type="submit" class="subscribe-btn tp-btn btn-primary">Register</button>
                                 </div>
 
                             </div>
                             <div class="form-bottom-text">
-                                <p class="text-center">Have no account yet? <a href="{{route('auth.register_view')}}">Sign up</a> </p>
+                                <p class="text-center">Already have an account? <a href="{{route('auth.login_view')}}">Sign in</a> </p>
                             </div>
                         </form>
                     </div>

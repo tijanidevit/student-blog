@@ -78,13 +78,22 @@
                         <div class="eblog-header-top-subs-social-menu">
                             <div class="eblog-header-top-subs-social">
                                 @guest
-                                <div class="eblog-header-top-subscribe-btn">
-                                    <a href="{{route('auth.register_view')}}" class="eblog-py-btn" onclick="document.getElementById('id01').style.display='inline'">Register</a>
-                                </div>
+                                    <div class="eblog-header-top-subscribe-btn">
+                                        <a href="{{route('auth.register_view')}}" class="eblog-py-btn" onclick="document.getElementById('id01').style.display='inline'">Register</a>
+                                    </div>
+                                    <div class="eblog-header-top-login-btn">
+                                        <a href="{{route('auth.login_view')}}" class="eblog-login-btn">Login</a>
+                                    </div>
                                 @endguest
-                                <div class="eblog-header-top-login-btn">
-                                    <a href="{{route('auth.login_view')}}" class="eblog-login-btn">Login</a>
-                                </div>
+
+                                @auth
+                                    @if (auth()->user()->isAdmin())
+                                        <div class="eblog-header-top-subscribe-btn">
+                                            <a href="{{route('admin.dashboard')}}" class="eblog-py-btn" onclick="document.getElementById('id01').style.display='inline'">Admin Dashboard</a>
+                                        </div>
+                                    @endif
+                                    <a href="{{route('auth.login_view')}}" class="eblog-login-btn text-danger">Logout</a>
+                                @endauth
                             </div>
                         </div>
                     </div>

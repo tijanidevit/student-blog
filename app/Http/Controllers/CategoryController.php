@@ -8,9 +8,10 @@ class CategoryController extends Controller
 {
     public function index() {
         $categories = Category::oldest('name')->get();
+        dd($categories);
     }
 
     public function show($slug) {
-        // $category = Category::with('name')->get();
+        $category = Category::with('posts')->whereSlug($slug);
     }
 }

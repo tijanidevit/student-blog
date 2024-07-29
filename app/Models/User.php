@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,5 +58,12 @@ class User extends Authenticatable
 
     public function posts() : HasMany {
         return $this->hasMany(Post::class);
+    }
+
+
+
+
+    public function isAdmin() {
+        return $this->role == UserRoleEnum::ADMIN->value;
     }
 }

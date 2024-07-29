@@ -10,7 +10,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::as('auth.')->middleware('guest')->group(function () {
+Route::post('/', function () {
+    return view('welcome');
+});
+
+
+Route::as('auth.')->middleware(['web', 'guest'])->group(function () {
     Route::view('login', 'auth.login')->name('login_view');
     Route::post('login', [AuthController::class, 'login'])->name('login_action');
 
@@ -20,5 +25,6 @@ Route::as('auth.')->middleware('guest')->group(function () {
 
 
 Route::as('category.')->prefix('categories')->group(function () {
+    Route::get('', [CategoryController::class, 'index']);
     Route::get('{slug}', [CategoryController::class, 'show']);
 });
