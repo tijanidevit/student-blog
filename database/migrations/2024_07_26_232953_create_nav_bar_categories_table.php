@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('nav_bar_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('category_id');
             $table->timestamps();
         });
     }

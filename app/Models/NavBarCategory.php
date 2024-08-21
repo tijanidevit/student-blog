@@ -11,4 +11,9 @@ class NavBarCategory extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+
+    public function category() : BelongsTo {
+        return $this->belongsTo(Category::class);
+    }
 }

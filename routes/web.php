@@ -22,7 +22,7 @@ Route::as('auth.')->middleware(['web', 'guest'])->group(function () {
 
 Route::as('category.')->prefix('categories')->group(function () {
     Route::get('', [CategoryController::class, 'index']);
-    Route::get('{slug}', [CategoryController::class, 'show']);
+    Route::get('{slug}', [CategoryController::class, 'show'])->name('show');
 });
 
 
