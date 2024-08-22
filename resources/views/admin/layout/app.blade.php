@@ -21,8 +21,24 @@
     <link href="/admin/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="/admin/lib/chartist/chartist.css" rel="stylesheet">
 
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="/admin/css/bracket.css">
+
+    <style>
+        .sortable-add {
+            opacity: 0.4;
+            background-color: #52cd58;
+            border: 2px dashed #ccc;
+        }
+        .sortable-remove {
+            opacity: 0.4;
+            background-color: #cd7952;
+            border: 2px dashed #ccc;
+        }
+
+    </style>
   </head>
 
   <body>

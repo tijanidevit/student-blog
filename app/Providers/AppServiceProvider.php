@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use App\Models\TopCategory;
+use Illuminate\Support\Facades\Cache;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
@@ -62,5 +64,14 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
+        View::composer('*', function ($view) {
+            // Cache the categories for 60 minutes
+            $categories = Cache::remember('navbar_categories', 60, function () {
+                return TopCategory::with('category')->oldest('order')->get(); // Adjust the query as per your needs
+            });
+
+            // Share the cached categories with all views
+            $view->with('navBarCategories', $categories);
+        });
     }
 }

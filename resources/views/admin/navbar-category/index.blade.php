@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('title')
-Top Categories
+NavBar Categories
 @endsection
 
 @section('body')
@@ -11,12 +11,12 @@ Top Categories
         <nav class="breadcrumb pd-0 mg-0 tx-12">
           <a class="breadcrumb-item" href="{{route('admin.dashboard')}}">Dashboard</a>
           <a class="breadcrumb-item" href="{{route('admin.category.index')}}">Categories</a>
-          <a class="breadcrumb-item active" href="#">Top Categories</a>
+          <a class="breadcrumb-item active" href="#">Nav bar Categories</a>
         </nav>
     </div><!-- br-pageheader -->
     <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">Top Categories</h4>
-        <p class="mg-b-0">Manage the categories you want people to see on the homepage.</p>
+        <h4 class="tx-gray-800 mg-b-5">Nav bar Categories</h4>
+        <p class="mg-b-0">Manage the categories you want people to see on the nabvar.</p>
     </div>
 
     <div class="br-pagebody">
@@ -34,7 +34,7 @@ Top Categories
                 </div>
             @enderror
 
-            <form class="" method="POST" action="{{route('admin.top-category.store')}}">
+            <form class="" method="POST" action="{{route('admin.navbar-category.store')}}">
                 @csrf
                 <div class="row mb-5">
 
@@ -44,8 +44,8 @@ Top Categories
                             <div>
                                 <label for="category_{{ $category->id }}">
                                     {{ $category->name }}
-                                    <input data-order='{{$category->topCategory->order ?? null}}' type="checkbox" name="categories" id="category_{{ $category->id }}"
-                                        @checked($category->topCategory) value="{{ $category->id }}">
+                                    <input data-order='{{$category->navBarCategory->order ?? null}}' type="checkbox" name="categories" id="category_{{ $category->id }}"
+                                        @checked($category->navBarCategory) value="{{ $category->id }}">
                                 </label>
                             </div>
                         @empty
@@ -55,7 +55,7 @@ Top Categories
 
 
                     <div class="col-md-6">
-                        <h6 class="mb-2">Selected Top Categories</h6>
+                        <h6 class="mb-2">Selected NavBar Categories</h6>
                         <div id="sortable-left" class="list-group col">
                             <!-- This area will be populated with checked categories -->
                         </div>

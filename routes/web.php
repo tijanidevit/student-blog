@@ -8,7 +8,11 @@ require __DIR__.'/../routes/admin.php';
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('loginx', function () {
+    return to_route('home');
+})->name('login');
 
 
 Route::as('auth.')->middleware(['web', 'guest'])->group(function () {

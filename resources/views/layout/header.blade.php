@@ -129,7 +129,16 @@
                                            @class(['eblog-dropdown-main-element', 'active' => Route::currentRouteName() == 'home'])>
                                             Home
                                         </a>
+
+                                    @forelse ($navBarCategories as $item)
+                                    <li class="menu-item">
+                                        <a href="{{route('category.show', $item->category->slug)}}" @class(['eblog-dropdown-main-element'])>
+                                            {{$item->category->name}}
+                                        </a>
                                     </li>
+                                    @empty
+
+                                    @endforelse
                                 </ul>
                             </div>
                         </nav>

@@ -16,3 +16,6 @@
 <script src="/admin/js/bracket.js"></script>
 <script src="/admin/js/ResizeSensor.js"></script>
 <script src="/admin/js/dashboard.js"></script>
+
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+@yield('extra-scripts')

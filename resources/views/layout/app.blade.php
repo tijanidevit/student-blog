@@ -10,7 +10,6 @@
     <link rel="stylesheet preload" href="/assets/css/vendor/fonts.css" as="style">
     <link rel="stylesheet preload" href="/assets/css/vendor/magnific-popup.css" as="style">
     <link rel="stylesheet preload" href="/assets/css/style.css" as="style">
-
     @yield('meta')
 </head>
 
