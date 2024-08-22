@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\NavBarCategoryController;
-use App\Http\Controllers\TopCategoryController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NavBarCategoryController;
+use App\Http\Controllers\Admin\TopCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
