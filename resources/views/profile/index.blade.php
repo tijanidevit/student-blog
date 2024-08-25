@@ -35,11 +35,11 @@
             <div class="container">
                 <div class="section-inner">
                     <div class="image-area">
-                        <img src="{{$user->image}}" width="307" alt="{{$user->name}}">
+                        <img src="{{$user->image  ?? '/assets/images/banner/author-2.jpg'}}" width="307" alt="{{$user->name}}">
                     </div>
                     <div class="content-area">
                         <h3 class="heading-title">{{$user->name}}</h3>
-                        <p class="desc">{{$user->about}}</p>
+                        <p class="desc">{{$user->about ?? "Bio not added yet!"}}</p>
                         <p class="post">{{$user->posts_count}} Posts</p>
 
                        @if (auth()->id() == $user->id)

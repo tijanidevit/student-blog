@@ -20,7 +20,7 @@
                             <div class="meta">
                                 <a href="{{url('/')}}" class="prev">Home</a>
                                 <img src="/assets/images/icon/chevron-right.svg" alt="">
-                                <a href="#" class="last">All Posts</a>
+                                <a href="#" class="last">{{request()->search ? "Search - ". request()->search : "All Posts" }}</a>
                             </div>
                         </div>
                         <!-- bread crumb inner wrapper end -->
@@ -32,6 +32,9 @@
         <section class="eblog-featured-post-area area-2 tp-section-gapTop container mb-5">
             <div class="section-inner">
                 <div class="row g-5">
+                    @if (request()->search)
+                        <h4>Search result for {{request()->search}}</h4>
+                    @endif
                     @forelse ($posts as $post)
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="eblog-featured-news style-two small">
@@ -60,7 +63,7 @@
 
 
                 <div class="d-flex justify-content-end mt-5">
-                    {{$posts->links()}}
+                    {{$posts->appends(['search' => request()->search])->links()}}
                 </div>
             </div>
         </section>

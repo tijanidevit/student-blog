@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/../routes/admin.php';
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('loginx', function () {
     return to_route('home');
@@ -39,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('{slug}', [PostController::class, 'show'])->name('show');
         Route::post('', [PostController::class, 'store'])->name('store');
         Route::get('{slug}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::post('{slug}/like', [PostController::class, 'like'])->name('like');
         Route::patch('{slug}', [PostController::class, 'update'])->name('update');
         Route::delete('{slug}', [PostController::class, 'delete'])->name('delete');
 

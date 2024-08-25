@@ -38,6 +38,7 @@
                     <p class="desc mb--40">Please provide your full details here</p>
                     <div class="form-inner inner">
 
+                        @if (!auth()->user()->isAdmin())
                         <div class="single-input-wrapper name">
                             <label for="terms"> Matric number</label>
                             <input type="text" readonly value="{{$user->student->matric_no}}">
@@ -66,6 +67,7 @@
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
+                        @endif
 
 
                         <div class="single-input-wrapper">

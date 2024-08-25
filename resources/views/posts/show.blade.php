@@ -64,8 +64,13 @@
                                                 {{$post->views}} views
                                             </li>
                                             <li>
-                                                <i class="fa fa-thumbs-up"></i>
-                                                {{$post->likes}} likes
+                                                <form action="{{route('post.like', $post->slug)}}" method="POST">
+                                                    @csrf
+                                                    <button>
+                                                        <i @class(['fa fa-thumbs-up', 'text-success' => $userHasLikedPost])></i>
+                                                        {{$post->likes}} likes
+                                                    </button>
+                                                </form>
                                             </li>
                                         </ul>
                                         <a href="{{route('category.show', $post->category->slug)}}" class="eblog-social">

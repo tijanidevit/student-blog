@@ -48,7 +48,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes() : HasMany {
+    public function postLikes() : HasMany {
         return $this->hasMany(PostLike::class);
     }
 
@@ -62,8 +62,8 @@ class Post extends Model
         return $this->whereStatus(PostStatusEnum::APPROVED->value);
     }
 
-    public function scopeOnlyDeclined() : Builder {
-        return $this->whereStatus(PostStatusEnum::DECLINED->value);
+    public function scopeOnlyBlocked() : Builder {
+        return $this->whereStatus(PostStatusEnum::BLOCKED->value);
     }
 
     public function scopeOnlyPending() : Builder {

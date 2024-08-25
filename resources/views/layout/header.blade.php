@@ -155,7 +155,9 @@
                                 <div class="container">
                                     <div class="search-input-inner">
                                         <div class="input-div">
-                                            <input id="searchInput1" class="search-input" type="text" placeholder="Search by keyword or #">
+                                            <form action="{{route('post.index')}}" method="get">
+                                                <input name="search" value="{{request()->search}}" id="searchInput1" class="search-input" type="text" placeholder="Search by keyword">
+                                            </form>
                                         </div>
                                         <div class="search-close-icon"><i class="fa-regular fa-xmark-large rt-xmark"></i></div>
                                     </div>

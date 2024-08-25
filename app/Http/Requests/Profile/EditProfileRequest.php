@@ -23,10 +23,13 @@ class EditProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3',
+            'name' => [
+                Rule::requiredIf(!auth()->user()->isAdmin()),
+                'min:3',
+            ],
             'about' => 'required|string',
             'image' => [
-                Rule::requiredIf(auth()->user()->image == null),
+                Rule::requiredIf(auth()->user()->image == null && !auth()->user()->isAdmin()),
                 'file',
                 'mimes:png,jpg',
             ],
