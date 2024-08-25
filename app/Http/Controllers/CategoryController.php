@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
@@ -13,12 +14,9 @@ class CategoryController extends Controller
     }
 
     public function show($slug) {
-        $category = Category::with([
-            'posts' => function ($query) {
-                $query->paginate();
-            }
-        ])->withCount('posts')->whereSlug($slug)->firstOrFail();
+        $category = Category::withCount('posts')->whereSlug($slug)->firstOrFail();
 
-        return view('category.show', compact('category'));
+        $posts = Post::with('user')->where('category_id', $category->id)->paginate();
+        return view('category.show', compact('category', 'posts'));
     }
 }

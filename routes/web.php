@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
         Route::post('{slug}/comments', [PostController::class, 'addComment'])->name('comment.store');
     });
 
+    Route::as('category.')->prefix('categories')->group(function () {
+        Route::get('{slug}', [CategoryController::class, 'show'])->name('show');
+    });
+
     Route::as('profile.')->prefix('profile')->group(function () {
         Route::get('edit', [ProfileController::class, 'edit'])->name('edit');
         Route::get('{id?}', [ProfileController::class, 'index'])->name('index');
