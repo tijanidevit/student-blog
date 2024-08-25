@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $totalStudents = $this->student->count();
         $totalPosts = $this->post->count();
         $pendingPosts = $this->post->onlyPending()->count();
-        $approvedPosts = $this->post->onlyPending()->count();
+        $approvedPosts = $this->post->onlyApproved()->count();
 
         $latestStudents = $this->student->with('user')->latest()->limit(8)->get();
 

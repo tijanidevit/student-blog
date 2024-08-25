@@ -1,5 +1,5 @@
 /*---------------------------
- CSS Index  
+ CSS Index
 ****************************
 
 1. variables
@@ -528,7 +528,7 @@ var {
 }
 
 /*---------------------------
-	List Style 
+	List Style
 ---------------------------*/
 ul,
 ol {
@@ -720,7 +720,7 @@ ol ul {
 }
 
 /*=========================
-    Section Separation 
+    Section Separation
 ==========================*/
 .slick-dotted.slick-slider {
   margin-bottom: 0;
@@ -8380,7 +8380,7 @@ iframe {
 }
 
 /*===============================
-    Background Color 
+    Background Color
 =================================*/
 .bg-color-primary {
   background: var(--color-primary);
@@ -8411,7 +8411,7 @@ iframe {
 }
 
 /*===========================
-Background Image 
+Background Image
 =============================*/
 .bg_image {
   background-repeat: no-repeat;
@@ -9085,7 +9085,7 @@ textarea:-ms-input-placeholder {
 }
 
 /*=============================
-	Overlay styles 
+	Overlay styles
 ==============================*/
 [data-overlay],
 [data-black-overlay],
@@ -9189,7 +9189,7 @@ textarea:-ms-input-placeholder {
 }
 
 /*------------------------------
-    Scroll Up 
+    Scroll Up
 --------------------------------*/
 #scrollUp {
   width: 70px;
@@ -9442,7 +9442,7 @@ a.pe-none {
 }
 
 /*------------------------
-    Header Sticky 
+    Header Sticky
 --------------------------*/
 /* Start Sticky Menu */
 .eblog-header-area.header-sticky {
@@ -13508,9 +13508,9 @@ Copyright (c) 2015 Daniel Eden
   opacity: 1;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-xclip 
+xclip
 
 -------------------------------- */
 .cd-headline.clip span {
@@ -18820,14 +18820,30 @@ form .form-inner.inner .single-input-wrapper input {
   border: 1px solid rgba(107, 114, 128, 0.25);
   color: var(--color-heading-1);
 }
-@media (max-width: 480px) {
-  form .form-inner.inner .single-input-wrapper input {
-    width: 100%;
+
+form .form-inner.inner .single-input-wrapper select {
+    padding: 12px 16px;
+    background: var(--color-white);
+    border-radius: 4px;
+    border: 1px solid rgba(107, 114, 128, 0.25);
+    color: var(--color-heading-1);
   }
+
+@media (max-width: 480px) {
+    form .form-inner.inner .single-input-wrapper input {
+      width: 100%;
+    }
+    form .form-inner.inner .single-input-wrapper select {
+      width: 100%;
+    }
 }
 form .form-inner.inner .single-input-wrapper input:focus {
   border: 1px solid var(--color-primary-2) !important;
 }
+form .form-inner.inner .single-input-wrapper select:focus {
+  border: 1px solid var(--color-primary-2) !important;
+}
+
 form .form-inner.inner .single-input-wrapper textarea {
   min-height: 160px;
   padding: 12px 16px;

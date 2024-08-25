@@ -66,6 +66,14 @@ class User extends Authenticatable
     }
 
 
+    // public function getImageAttribute() : string {
+    //     return $this->image ?? '/assets/images/banner/author-2.jpg';
+    // }
+
+
+    // public function getAboutAttribute() : string {
+    //     return $this->about ?? 'Bio not added yet!';
+    // }
 
 
     public function isAdmin() {

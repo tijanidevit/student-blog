@@ -2,13 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\Models\TopCategory;
+use App\Policies\PostPolicy;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -67,11 +71,21 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             // Cache the categories for 60 minutes
             $categories = Cache::remember('navbar_categories', 60, function () {
-                return TopCategory::with('category')->oldest('order')->get(); // Adjust the query as per your needs
+                return TopCategory::with('category')->oldest('order')->get();
+            });
+
+
+            $navbarPosts = Cache::remember('navbar_posts', 15, function () {
+                return Post::onlyApproved()->latest()->limit(4)->get();
             });
 
             // Share the cached categories with all views
             $view->with('navBarCategories', $categories);
+            $view->with('navbarPosts', $navbarPosts);
         });
+
+        Paginator::useBootstrapFive();
+
+        Gate::policy(Post::class, PostPolicy::class);
     }
 }

@@ -9,6 +9,7 @@
         "cviebrock/eloquent-sluggable": "^11.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "spatie/laravel-sitemap": "^7.2",
         "spatie/schema-org": "^3.23"
     },
     "require-dev": {

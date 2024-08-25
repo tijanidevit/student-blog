@@ -1,5 +1,5 @@
 
-@props(['title', 'description', 'keywords', 'author', 'canonical'])
+@props(['title', 'description', 'keywords', 'author', 'canonical', 'image'])
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +17,10 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ $canonical }}">
-    <meta property="og:image" content="{{ asset('path/to/default-image.jpg') }}">
+    <meta property="og:image" content="{{ $image ?? asset('path/to/default-image.jpg') }}">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">
-    <meta name="twitter:image" content="{{ asset('path/to/default-image.jpg') }}">
+    <meta name="twitter:image" content="{{ $image ?? asset('path/to/default-image.jpg') }}">
 

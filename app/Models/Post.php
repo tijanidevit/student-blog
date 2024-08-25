@@ -4,7 +4,8 @@ namespace App\Models;
 
 use App\Enums\PostStatusEnum;
 use App\Helpers\ContentHelper;
-use App\Traits\SluggableTrait;
+use App\Traits\HasCreator;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
-    use SluggableTrait, HasUuids, HasFactory;
+    use Sluggable, HasUuids, HasFactory, HasCreator;
 
     protected $guarded = ['id'];
 
@@ -23,6 +24,19 @@ class Post extends Model
         $this->attributes['content'] = $value;
         $this->attributes['excerpt'] = ContentHelper::generateExcerpt($value);
         $this->attributes['meta_description'] = ContentHelper::generateMetaDescription($value);
+    }
+
+    protected $attributes = [
+        'status' => PostStatusEnum::APPROVED->value
+    ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
 
