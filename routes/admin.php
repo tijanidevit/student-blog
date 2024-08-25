@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NavBarCategoryController;
 use App\Http\Controllers\Admin\TopCategoryController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'isAdmin'])->group(function() {
@@ -24,6 +25,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'isAdmin'])->group(fun
         Route::get('{slug}/edit', [CategoryController::class, 'edit'])->name('edit');
         Route::patch('{slug}', [CategoryController::class, 'update'])->name('update');
         Route::delete('{slug}', [CategoryController::class, 'delete'])->name('delete');
+    });
+
+    Route::as('post.')->prefix('posts')->group(function () {
+        Route::get('', [PostController::class, 'index'])->name('index');
+        Route::post('{id}/approve', [PostController::class, 'approve'])->name('approve');
     });
 
     Route::as('top-category.')->prefix('top-categories')->group(function () {

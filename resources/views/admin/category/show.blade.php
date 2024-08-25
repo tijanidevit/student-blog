@@ -5,6 +5,10 @@
 {{$category->name}}
 @endsection
 
+@php
+    use App\Enums\PostStatusEnum;
+@endphp
+
 @section('body')
 <div class="br-mainpanel br-profile-page">
 
@@ -39,12 +43,18 @@
 
     <div class="br-pagebody">
         <div class="br-section-wrapper">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{session('success')}}
+                </div>
+            @endif
             <div class="table-wrapper">
                 <table id="datatable1" class="table display responsive nowrap">
                     <thead>
                         <tr>
-                            <th class="wd-15p">Category</th>
-                            <th class="wd-15p">Posts added</th>
+                            <th class="wd-15p">Post Title</th>
+                            <th class="wd-15p">Added by</th>
+                            <th class="wd-15p">Status</th>
                             <th class="wd-15p">Created date</th>
                             <th class="wd-25p">Actions</th>
                         </tr>
@@ -52,16 +62,28 @@
                     <tbody>
                         @forelse ($category->posts as $post)
                         <tr>
-                            <td>{{$post->name}}</td>
-                            <td>{{$post->posts_count}}</td>
-                            <td>{{$post->created_at->format('d M, Y')}}</td>
-                            <td>t.nixon@datatables.net</td>
+                            <td><a target="_blank" href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></td>
+                            <td>{{$post->user?->name}}</td>
+                            <td class="text text-{{$post->status_color}}">{{$post->status}}</td>
+                            <td>{{$post->created_at->format('d M, Y - H:ia')}}</td>
+                            <td>
+                                <form action="{{route('admin.post.approve', $post->id)}}" method="POST">
+                                    @csrf
+                                    <button @class(['btn', 'btn-success' => $post->status !== PostStatusEnum::APPROVED->value, 'btn-danger' => $post->status ==  PostStatusEnum::APPROVED->value])>
+                                        {{$post->status !== PostStatusEnum::APPROVED->value ? "Approve" : "Block" }}
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         @empty
                             <p>No post added yet</p>
                         @endforelse
                     </tbody>
                 </table>
+
+                <div>
+                    {{$category->posts->links()}}
+                </div>
             </div>
         </div><!-- br-section-wrapper -->
     </div>

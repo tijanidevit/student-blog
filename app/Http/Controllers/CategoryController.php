@@ -14,9 +14,13 @@ class CategoryController extends Controller
     }
 
     public function show($slug) {
-        $category = Category::withCount('posts')->whereSlug($slug)->firstOrFail();
+        $category = Category::withCount([
+            'posts' => function ($query) {
+                $query->onlyApproved();
+            }
+        ])->whereSlug($slug)->firstOrFail();
 
-        $posts = Post::with('user')->where('category_id', $category->id)->paginate();
+        $posts = Post::with('user')->onlyApproved()->where('category_id', $category->id)->paginate();
         return view('category.show', compact('category', 'posts'));
     }
 }

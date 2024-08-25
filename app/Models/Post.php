@@ -58,15 +58,25 @@ class Post extends Model
 
 
     // SCOPES
-    public function scopeOnlyApproved() : Builder {
-        return $this->whereStatus(PostStatusEnum::APPROVED->value);
+    public function scopeOnlyApproved($query) : Builder {
+        return $query->whereStatus(PostStatusEnum::APPROVED->value);
     }
 
-    public function scopeOnlyBlocked() : Builder {
-        return $this->whereStatus(PostStatusEnum::BLOCKED->value);
+    public function scopeOnlyBlocked($query) : Builder {
+        return $query->whereStatus(PostStatusEnum::BLOCKED->value);
     }
 
-    public function scopeOnlyPending() : Builder {
-        return $this->whereStatus(PostStatusEnum::PENDING->value);
+    public function scopeOnlyPending($query) : Builder {
+        return $query->whereStatus(PostStatusEnum::PENDING->value);
+    }
+
+    public function getStatusColorAttribute() : string {
+        if ($this->status == PostStatusEnum::APPROVED->value) {
+            return 'success';
+        }
+        else if ($this->status == PostStatusEnum::BLOCKED->value) {
+            return 'danger';
+        }
+        return 'secondary';
     }
 }

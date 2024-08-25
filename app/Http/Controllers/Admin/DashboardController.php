@@ -16,11 +16,12 @@ class DashboardController extends Controller
     {
         $totalStudents = $this->student->count();
         $totalPosts = $this->post->count();
-        $pendingPosts = $this->post->onlyPending()->count();
+        $blockedPosts = $this->post->onlyBlocked()->count();
         $approvedPosts = $this->post->onlyApproved()->count();
-
         $latestStudents = $this->student->with('user')->latest()->limit(8)->get();
 
-        return view('admin.dashboard', compact('totalStudents', 'totalPosts', 'pendingPosts', 'approvedPosts', 'latestStudents'));
+        $posts = $this->post->with('user', 'category')->latest()->take(3)->get();
+
+        return view('admin.dashboard', compact('totalStudents', 'totalPosts', 'blockedPosts', 'approvedPosts', 'latestStudents', 'posts'));
     }
 }

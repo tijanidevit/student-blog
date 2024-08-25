@@ -2,43 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PostStatusEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index()
+    public function approve(string $id)
     {
-        //
-    }
+        $post = Post::find($id);
+        if ($post->status == PostStatusEnum::APPROVED->value) {
+            $post->status = PostStatusEnum::BLOCKED->value;
+        }
+        else{
+            $post->status = PostStatusEnum::APPROVED->value;
+        }
 
-    public function create()
-    {
-        //
-    }
+        $post->save();
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', "Post $post->status successfully");
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\NewCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Post;
 
 class CategoryController extends Controller
 {
@@ -15,11 +16,9 @@ class CategoryController extends Controller
     }
 
     public function show($slug) {
-        $category = Category::with([
-            'posts' => function ($query) {
-                $query->paginate();
-            }
-        ])->withCount('posts')->whereSlug($slug)->firstOrFail();
+        $category = Category::withCount('posts')->whereSlug($slug)->firstOrFail();
+        $category->posts = Post::where('category_id', $category->id)->with('user')->paginate();
+
 
         return view('admin.category.show', compact('category'));
     }

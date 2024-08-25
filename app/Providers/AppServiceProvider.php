@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\NavBarCategory;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use App\Models\TopCategory;
 use App\Policies\PostPolicy;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
@@ -71,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             // Cache the categories for 60 minutes
             $categories = Cache::remember('navbar_categories', 60, function () {
-                return TopCategory::with('category')->oldest('order')->get();
+                return NavBarCategory::with('category')->oldest('order')->get();
             });
 
 

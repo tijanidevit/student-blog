@@ -1,5 +1,8 @@
 @extends('admin.layout.app')
 
+@section('title')
+    Dashboard
+@endsection
 
 @section('body')
 
@@ -40,9 +43,9 @@
             <div class="pd-25 d-flex align-items-center">
               <i class="ion ion-clock tx-60 lh-0 tx-white op-7"></i>
               <div class="mg-l-20">
-                <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Pending posts</p>
-                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{$pendingPosts}}</p>
-                <span class="tx-11 tx-roboto tx-white-6">Posts awaiting your approval</span>
+                <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Blocked posts</p>
+                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{$blockedPosts}}</p>
+                <span class="tx-11 tx-roboto tx-white-6">Posts that are blocked and not accessible</span>
               </div>
             </div>
           </div>
@@ -78,7 +81,7 @@
                     @forelse ($latestStudents as $student)
                         <tr>
                             <td class="pd-l-0-force">
-                                <img src="{{$student->show_image}}" class="wd-40 rounded-circle" alt="{{$student->user->name}}">
+                                <img src="{{$student?->user->show_image}}" class="wd-40 rounded-circle" alt="{{$student->user?->name}}">
                             </td>
                             <td>
                                 <h6 class="tx-inverse tx-14 mg-b-0">{{$student->user->name}}</h6>
@@ -110,63 +113,26 @@
                 <li data-target="#carousel2" data-slide-to="2"></li>
               </ol>
               <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                  <div class="bg-br-primary pd-30 ht-300 pos-relative d-flex align-items-center rounded">
-                    <div class="pos-absolute t-15 r-25">
-                      <a href="" class="tx-white-5 hover-info"><i class="icon ion-edit tx-16"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-stats-bars tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-gear-a tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-more tx-20"></i></a>
-                    </div>
-                    <div class="tx-white">
-                      <p class="tx-uppercase tx-11 tx-medium tx-mont tx-spacing-2 tx-white-5">Recent Article</p>
-                      <h5 class="lh-5 mg-b-20">20 Best Travel Tips After 5 Years Of Traveling The World</h5>
-                      <nav class="nav flex-row tx-13">
-                        <a href="" class="tx-white-8 hover-white pd-l-0 pd-r-5">12K+ Views</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">234 Shares</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">43 Comments</a>
-                      </nav>
-                    </div>
-                  </div><!-- d-flex -->
-                </div>
-                <div class="carousel-item">
-                  <div class="bg-info pd-30 ht-300 pos-relative d-flex align-items-center rounded">
-                    <div class="pos-absolute t-15 r-25">
-                      <a href="" class="tx-white-5 hover-info"><i class="icon ion-edit tx-16"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-stats-bars tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-gear-a tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-more tx-20"></i></a>
-                    </div>
-                    <div class="tx-white">
-                      <p class="tx-uppercase tx-11 tx-medium tx-mont tx-spacing-2 tx-white-5">Recent Article</p>
-                      <h5 class="lh-5 mg-b-20">How I Flew Around the World in Business Class for $1,340</h5>
-                      <nav class="nav flex-row tx-13">
-                        <a href="" class="tx-white-8 hover-white pd-l-0 pd-r-5">Edit</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">Unpublish</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">Delete</a>
-                      </nav>
-                    </div>
-                  </div><!-- d-flex -->
-                </div>
-                <div class="carousel-item">
-                  <div class="bg-purple pd-30 ht-300 d-flex pos-relative align-items-center rounded">
-                    <div class="pos-absolute t-15 r-25">
-                      <a href="" class="tx-white-5 hover-info"><i class="icon ion-edit tx-16"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-stats-bars tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-gear-a tx-20"></i></a>
-                      <a href="" class="tx-white-5 hover-info mg-l-7"><i class="icon ion-more tx-20"></i></a>
-                    </div>
-                    <div class="tx-white">
-                      <p class="tx-uppercase tx-11 tx-medium tx-mont tx-spacing-2 tx-white-5">Recent Article</p>
-                      <h5 class="lh-5 mg-b-20">10 Reasons Why Travel Makes You a Happier Person</h5>
-                      <nav class="nav flex-row tx-13">
-                        <a href="" class="tx-white-8 hover-white pd-l-0 pd-r-5">Edit</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">Unpublish</a>
-                        <a href="" class="tx-white-8 hover-white pd-x-5">Delete</a>
-                      </nav>
-                    </div>
-                  </div><!-- d-flex -->
-                </div>
+                @forelse ($posts as $post)
+                <div @class(['carousel-item', 'active' => $loop->first])>
+                    <div class="bg-br-primary pd-30 ht-300 pos-relative d-flex align-items-center rounded">
+
+                      <div class="tx-white">
+                        <a href="{{route('admin.category.show', $post->category->slug)}}" class="tx-uppercase tx-11 tx-medium tx-mont tx-spacing-2 tx-white-5">{{$post->category->name}}</a>
+                        <h5 class="lh-5 mg-b-20">
+                            <a target="_blank" class="text-white" href="{{route('post.show', $post->slug)}}">{{$post->title}}</a>
+                        </h5>
+                        <nav class="nav flex-row tx-13">
+                          <a href="" class="tx-white-8 hover-white pd-l-0 pd-r-5">By {{$post->user?->name}} - {{$post->created_at->diffForHumans()}} | </a>
+                          <a href="" class="tx-white-8 hover-white pd-l-0 pd-r-5">{{$post->views}} views</a>
+                          <a href="" class="tx-white-8 hover-white pd-x-5">{{$post->likes}} likes</a>
+                        </nav>
+                      </div>
+                    </div><!-- d-flex -->
+                  </div>
+                @empty
+
+                @endforelse
               </div><!-- carousel-inner -->
             </div><!-- carousel -->
           </div><!-- card -->
