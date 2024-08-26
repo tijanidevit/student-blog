@@ -34,7 +34,7 @@
         </a><!-- br-menu-link -->
 
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="accordion.html" class="nav-link">All posts</a></li>
+            <li class="nav-item"><a href="{{route('admin.post.index')}}" class="nav-link">All posts</a></li>
         </ul>
 
 
@@ -49,7 +49,7 @@
         </a><!-- br-menu-link -->
 
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="accordion.html" class="nav-link">All users</a></li>
+            <li class="nav-item"><a href="{{route('admin.student.index')}}" class="nav-link">All users</a></li>
         </ul>
       </div><!-- br-sideleft-menu -->
 

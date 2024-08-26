@@ -1,31 +1,31 @@
 @extends('admin.layout.app')
 
+
+@section('title')
+All Posts
+@endsection
+
 @php
     use App\Enums\PostStatusEnum;
 @endphp
 
-
 @section('body')
 <div class="br-mainpanel br-profile-page">
 
-    <div class="card shadow-base bd-0 rounded-0 widget-4">
-      <div class="card-header ht-75">
-        <div class="hidden-xs-down">
-          <a href="" class="mg-r-10"><span class="tx-medium">{{$student->user->posts_count}}</span> Posts</a>
+    <div class="br-pageheader pd-y-15 pd-l-20">
+        <nav class="breadcrumb pd-0 mg-0 tx-12">
+          <a class="breadcrumb-item" href="{{route('admin.dashboard')}}">Dashboard</a>
+          <a class="breadcrumb-item active" href="#">All Posts</a>
+        </nav>
+    </div><!-- br-pageheader -->
+    <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h4 class="tx-gray-800 mg-b-5">All Posts</h4>
+                <p class="mg-b-0">List of all the post.</p>
+            </div>
         </div>
-      </div><!-- card-header -->
-      <div class="card-body">
-        <div class="card-profile-img">
-          <img src="{{$student->user?->show_image}}" alt="">
-        </div><!-- card-profile-img -->
-        <h4 class="tx-normal tx-roboto tx-white">{{$student->user->name}}</h4>
-        <p class="mg-b-25">{{$student->user->email}}</p>
-
-        <p class="mg-b-0 tx-24">
-            {{$student->user->posts_count}} Posts
-        </p>
-      </div><!-- card-body -->
-    </div><!-- card -->
+    </div>
 
     <div class="br-pagebody">
         <div class="br-section-wrapper">
@@ -97,5 +97,4 @@
             </div>
         </div><!-- br-section-wrapper -->
     </div>
-
 @endsection
